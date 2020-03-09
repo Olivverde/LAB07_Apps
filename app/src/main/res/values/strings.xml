@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Survey App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_addQuestion">Add Question</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="new_quiz">Nueva encuesta</string>
+    <string name="list_content_desc">Un icono de lista</string>
+    <string name="About" >About it</string>
+    <string name="all_questions">Questions</string>
+    <string name="answereds">Answereds</string>
+    <string name="menu_all_questions">All questions</string>
+    <string name="menu_answereds">Answereds</string>
+    <string name="menu_question">Question (%1$d/%2$d)</string>
+    <string name="menu_results">Results</string>
+    <string name="add_your_question">Ingrese la nueva pregunta</string>
+    <string name="question">Pregunta</string>
+    <string name="answer_hint">Escriba su respuesta</string>
+    <string name="rating_number">Rating: %.2f</string>
+    <string name="encuestas_number">Encuestas: %1$d</string>
+    <string name="see_answers">Ver Respuestas</string>
+    <string name="avatar_image">Imagen de avatar</string>
+    <string name="menu_about">About it</string>
+    <string name="surveyButton">New survey</string>
+    <string name="answerEntry">Entry answer</string>
+    <string name="survey">Survey</string>
+    <string name="new_survey">New Survey</string>
+    <string name="show_answer">Show answer</string>
+    <string name="universidad_del_valle">Universidad del Valle</string>
+    <string name="oliver_josue_de_leon_milian">Oliver Josue de Leon Milian</string>
+    <string name="question2">question</string>
+    <string name="add_new_question2">Add new Question</string>
+
+    <string-array name="types_array">
+        <item>Text</item>
+        <item>Number</item>
+        <item>Rating</item>
+    </string-array>
+</resources>
