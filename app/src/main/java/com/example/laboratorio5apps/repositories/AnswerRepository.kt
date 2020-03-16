@@ -26,6 +26,7 @@ class AnswerRepository(val answerDAO: AnswerDAO) {
     //Initialize uiScope
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     val allAnswers: LiveData<List<Answer>> = answerDAO.getAll()
+    val rating = answerDAO.ratingMean()
 
     /**
      * Raw method
