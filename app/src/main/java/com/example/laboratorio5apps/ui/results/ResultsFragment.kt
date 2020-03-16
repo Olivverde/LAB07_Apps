@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.laboratorio5apps.R
@@ -31,11 +32,18 @@ class ResultsFragment : Fragment() {
         )
         binding.model = resultsViewModel
         //
-        binding.rating.text = getString(R.string.rating_number,  resultsViewModel.rating.value)
+        resultsViewModel.rating.observe(this, Observer { it ->
+            binding.rating.text = getString(R.string.rating_number, it)
+        })
+        resultsViewModel.count.observe(this, Observer { it ->
+            binding.encuestas.text = getString(R.string.encuestas_number, it)
+        })
+        //
         binding.newQuiz.setOnClickListener{view: View ->
             view.findNavController().navigate(R.id.action_nav_results_to_nav_question)
         }
         binding.seeAnswers.setOnClickListener{view: View ->
+            view.findNavController().navigate(R.id.action_nav_results_to_nav_answereds)
         }
         return binding.root
     }

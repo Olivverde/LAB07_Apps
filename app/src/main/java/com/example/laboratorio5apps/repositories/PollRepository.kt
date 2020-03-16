@@ -14,52 +14,35 @@ import kotlinx.coroutines.*
  */
 class PollRepository(val pollDAO: PollDAO) {
 
-    //Job utilities
+    //Aplicaciones con Job y uiScope
     private var viewModelJob = Job()
 
-    /**
-     * Kill the job anytime
-     */
     fun cancelJob() {
         viewModelJob.cancel()
     }
 
-    //initialize the uiScope
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    //init
-    init {
-        initialize()
-    }
-
-    /**
-     * Launch the scope
-     */
-    fun initialize() {
-        uiScope.launch {
-            getLastId()
-        }
-    }
-
+    //Data
+    //obtiene todas nomas asi por la igualacion
     val allPolls: LiveData<List<Poll>> = pollDAO.getAll()
-    var lastId: Int = -1
+    var lastId = -1
+    val count = pollDAO.count()
+
+    //Metodos crud
     suspend fun insert(poll: Poll) {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
+            async {
                 pollDAO.insert(poll)
-            }
+            }.await()
         }
     }
 
-    /**
-     * Get last ID
-     */
-    suspend fun getLastId() {
-        uiScope.launch {
-            withContext(Dispatchers.IO) {
-                val last: Int = pollDAO.getLastId()
-                lastId = last
-            }
+    suspend fun getLastId(): Int {
+        return withContext(Dispatchers.IO) {
+            val last = pollDAO.getLastId()
+            lastId = last
+            last
         }
     }
 

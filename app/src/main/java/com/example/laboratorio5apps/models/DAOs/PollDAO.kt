@@ -36,4 +36,7 @@ interface PollDAO {
      */
     @Query("DELETE FROM poll_table")
     fun deleteAll()
+
+    @Query(value = "SELECT COUNT(poll_id) FROM poll_table")
+    fun count(): LiveData<Int>
 }

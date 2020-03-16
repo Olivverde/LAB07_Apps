@@ -22,8 +22,9 @@ class QuestionFragment : Fragment() {
     private lateinit var binding: FragmentQuestionBinding
 
 
-    private lateinit var questions: List<Question>
+    private var questions: List<Question> = emptyList<Question>()
     private var count = 0
+    private var newPoll = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,24 +38,28 @@ class QuestionFragment : Fragment() {
         binding.model = questionViewModel
         //
         questionViewModel.allQuestions.observe(this, Observer {
-            questions = it
-            binding.question.text = it.get(count).question
-            setLabelNavigationTitleBar()
-            setVisibleType()
+            if (it.size != 0) {
+                questions = it
+                binding.question.text = it.get(count).question
+                setLabelNavigationTitleBar()
+                setVisibleType()
+            }
         })
+        //crear encuesta
+        if (newPoll) {
+            questionViewModel.addPoll()
+            newPoll = false
+        }
         //
         binding.next.setOnClickListener{view: View ->
             if (!binding.etAnswer.text.toString().equals("") || !binding.etAnswerNumber.text.toString().equals("")
                 || questions.get(count).type == 3) {
-                //crear encuesta
-                questionViewModel.addPoll()
-                //
-                if (questions.get(count).type != 3) {
-                    questionViewModel.addAnswerToQuestion(binding.etAnswer.text.toString(),0,0.0,questions.get(count).id)
-                } else if(questions.get(count).type != 2) {
-                    questionViewModel.addAnswerToQuestion("",binding.etAnswerNumber.text.toString().toInt(), 0.0,questions.get(count).id)
-                } else {
+                if (questions.get(count).type == 3) {
                     questionViewModel.addAnswerToQuestion("",0,binding.ratingBar.rating.toString().toDouble(),questions.get(count).id)
+                } else if(questions.get(count).type == 2) {
+                    questionViewModel.addAnswerToQuestion("",binding.etAnswerNumber.text.toString().toInt(), 0.0,questions.get(count).id)
+                } else if(questions.get(count).type == 1) {
+                    questionViewModel.addAnswerToQuestion(binding.etAnswer.text.toString(),0,0.0,questions.get(count).id)
                 }
                 count++
                 setLabelNavigationTitleBar()
